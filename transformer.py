@@ -3,6 +3,7 @@ import math
 import numpy as np
 import torch
 import torch.nn as nn
+import matplotlib.pyplot as plt
 from torch.autograd import Variable
 
 
@@ -93,3 +94,8 @@ def subsequent_mask(size):
     subsequent_mask = np.triu(np.ones(attn_shape), k=1).astype("uint8")
 
     return torch.from_numpy(1 - subsequent_mask)
+
+
+plt.figure(figsize=(5, 5))
+plt.imshow(subsequent_mask(20)[0])
+plt.savefig('subsequent_mask.pdf')
