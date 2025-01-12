@@ -1,8 +1,9 @@
+import math
+
+import numpy as np
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
-
-import math
 
 
 class Embeddings(nn.Module):
@@ -84,3 +85,11 @@ print(pe_result.shape)
 # plt.plot(np.arange(100), y[0, :, :].data.numpy())
 # # plt.legend(["dim %d" % p for p in [4, 5, 6, 7]])
 # plt.savefig('plot.png')
+
+
+def subsequent_mask(size):
+    attn_shape = (1, size, size)
+
+    subsequent_mask = np.triu(np.ones(attn_shape), k=1).astype("uint8")
+
+    return torch.from_numpy(1 - subsequent_mask)
